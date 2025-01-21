@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f3bcce 0%, #9ff3f0 100%);
+            color: #333;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .nav-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #4a5568;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item:hover {
+            background-color: #7fb8f4;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        #logout-link.nav-item:hover {
+            background-color: #ee5d5d;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #7fb8f4, #567ace);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: glow 2s infinite;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.05);
+            background-color: #567ace;
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        .header {
+            font-size: 3rem;
+            color: #1a202c;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background: url('../image/logo.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0.85;
+            margin-bottom: 16px;
+        }
+
+        .sidebar {
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #popup-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Loading spinner */
+        #loading-spinner {
+            display: none;
+        }
+
+        .loader {
+            border-top-color: #3498db;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+            }
+        }
+
+        /* Mobile responsive for sidebar */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                left: -350px;
+                top: 0;
+                height: 100%;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            #menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+                background-color: #3490dc;
+                padding: 10px;
+                border-radius: 5px;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glass">
+        <!-- Mobile Menu Toggle -->
+        <div id="menu-toggle">☰</div>
+
+        <!-- Sidebar -->
+        <div class="sidebar flex flex-col items-center">
+            <div class="logo"></div>
+            <ul class="w-full">
+                <li id="approveinternship-link" class="nav-item"><a href="#">Approve Internship</a></li>
+                <li id="assignment-review-link" class="nav-item"><a href="#">Review Assignments</a></li>
+                <li id="grade-entry-link" class="nav-item"><a href="#">Mark Allocation</a></li>
+                <li id="logout-link" class="nav-item"><a href="#">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h1 class="header"> Welcome Ms. Alice!</h1>
+            <button id="add-btn" class="primary-btn">Faculty Dashboard</button>
+        </div>
+
+        <!-- Popup for Logout -->
+        <div id="popup-message">Logged out Successfully!</div>
+
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+            <div class="loader ease-linear rounded-full border-4 border-t-4 border-blue-500 h-12 w-12"></div>
+        </div>
+
+        <!-- Alert box for Notifications -->
+        <div id="alert-box" class="hidden fixed top-10 right-10 bg-blue-500 text-white py-4 px-6 rounded-lg shadow-lg z-50">
+            <p id="alert-message">New Assignment Review Requests!</p>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle navigation and interactivity -->
+    <script>
+        // Show loading spinner
+        function showLoadingSpinner() {
+            document.getElementById('loading-spinner').style.display = 'flex';
+        }
+
+        // Hide loading spinner
+        function hideLoadingSpinner() {
+            document.getElementById('loading-spinner').style.display = 'none';
+        }
+
+        // Show alert box with custom message
+        function showAlert(message) {
+            var alertBox = document.getElementById('alert-box');
+            document.getElementById('alert-message').innerText = message;
+            alertBox.classList.remove('hidden');
+
+            // Hide the alert after 3 seconds
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Simulate a new notification on page load
+        window.onload = function () {
+            showAlert('You have 5 pending assignments to review!');
+        };
+
+        // Simulate page navigation
+        function navigateTo(page) {
+            showLoadingSpinner();
+            setTimeout(() => {
+                hideLoadingSpinner();
+                alert('Navigated to ' + page);
+            }, 1500); // Simulates loading time
+        }
+
+        // Attach event listeners to navigation items
+        document.getElementById('approveinternship-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.href = "approveinternship.html";
+        });
+
+        document.getElementById('assignment-review-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.href = "dailyreport.html";
+        });
+
+        document.getElementById('grade-entry-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.href = "mark.html";
+        });
+
+        document.getElementById('logout-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            showLoadingSpinner();
+            setTimeout(() => {
+                hideLoadingSpinner();
+                document.getElementById('popup-message').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('popup-message').style.display = 'none';
+                    window.location.href='../Loginpage/main.html'; // Replace with the actual login page URL
+                }, 2000); // Simulates loading time and redirects to the login page
+            }, 1000); // Simulate a brief loading time for logging out
+        });
+
+        // Prevent the Faculty Dashboard button from navigating
+        document.getElementById('add-btn').addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the default action of the button
+            console.log('Faculty Dashboard button clicked!');
+        });
+
+        // Sidebar toggle for mobile view
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>

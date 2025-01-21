@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Course Evaluation Criteria</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ebacc1 0%, #9ff3f0 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .evaluation-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            overflow: hidden; /* Ensure container remains within the view */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .student-search {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .student-search input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        .student-search button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .student-search button:hover {
+            background-color: #45a049;
+        }
+
+        .evaluation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .evaluation-table th, .evaluation-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .evaluation-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .total-score {
+            text-align: right;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Ensure student info doesn't overlap */
+        #student-info {
+            display: none;
+            margin-bottom: 15px;
+            margin-top: 20px; /* Add margin to avoid overlap */
+        }
+    </style>
+</head>
+<body>
+    <div class="evaluation-container">
+        <div class="header">
+            <h1>Mark Allocation for Internship</h1>
+            <p>Enter marks for each category based on the student’s performance (out of 100).</p>
+        </div>
+
+        <!-- Student Search -->
+        <div class="student-search">
+            <input type="text" id="student-name" placeholder="Enter Roll Number">
+            <button onclick="searchStudent()">Search Student</button>
+        </div>
+
+        <!-- Student Details (Dynamic section after search) -->
+        <div id="student-info">
+            <p><strong>Name:</strong> <span id="student-display-name"></span></p>
+            <p><strong>Roll Number:</strong> <span id="student-roll"></span></p>
+            <p><strong>Company Name:</strong> <span id="student-company"></span></p>
+        </div>
+
+        <!-- Mark Evaluation Table - Always Visible -->
+        <table class="evaluation-table">
+            <thead>
+                <tr>
+                    <th>Evaluation Criteria</th>
+                    <th>Max Marks</th>
+                    <th>Marks Obtained</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Future Perspective</td>
+                    <td>20</td>
+                    <td><input type="number" id="future" max="20" min="0" value="0" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Quality Of Industry</td>
+                    <td>10</td>
+                    <td><input type="number" id="quality" max="10" min="0" value="0" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Report Submission</td>
+                    <td>15</td>
+                    <td><input type="number" id="report" max="15" min="0" value="0" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Clarity In Objective</td>
+                    <td>20</td>
+                    <td><input type="number" id="clarity" max="20" min="0" value="0" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Technical Competency Obtained</td>
+                    <td>15</td>
+                    <td><input type="number" id="technical" max="15" min="0" value="0" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>Quantum of Work Carried</td>
+                    <td>20</td>
+                    <td><input type="number" id="quantum" max="20" min="0" value="0" oninput="calculateTotal()"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="total-score">
+            Total Score: <span id="totalMarks">0</span>/100
+        </div>
+
+        <button class="submit-btn" onclick="submitEvaluation()">Submit Evaluation</button>
+    </div>
+
+    <script>
+        // Sample students data
+        const students = [
+            { name: 'Devasri S', roll: '7376221CS132', company: 'Google' },
+            { name: 'Rubasri S', roll: '7376221CS133', company: 'Amazon' },
+            { name: 'Gomathi P', roll: '7376221CS134', company: 'Infosys' },
+            { name: 'John C', roll: '7376221CS137', company: 'Capgemini' }
+        ];
+
+        // Show student details after search
+        function searchStudent() {
+            const searchInput = document.getElementById('student-name').value.trim().toLowerCase();
+            const student = students.find(s => s.name.toLowerCase() === searchInput || s.roll.toLowerCase() === searchInput);
+
+            if (student) {
+                // Update student info section with the found student
+                document.getElementById('student-display-name').textContent = student.name;
+                document.getElementById('student-roll').textContent = student.roll;
+                document.getElementById('student-company').textContent = student.company;
+                document.getElementById('student-info').style.display = 'block';
+            } else {
+                alert('Student not found! Please try again.');
+            }
+        }
+
+        // Calculate total marks
+        function calculateTotal() {
+            const future = parseInt(document.getElementById('future').value) || 0;
+            const quality = parseInt(document.getElementById('quality').value) || 0;
+            const report = parseInt(document.getElementById('report').value) || 0;
+            const clarity = parseInt(document.getElementById('clarity').value) || 0;
+            const technical = parseInt(document.getElementById('technical').value) || 0;
+            const quantum = parseInt(document.getElementById('quantum').value) || 0;
+
+            const totalMarks = future + quality + report + clarity + technical + quantum;
+            document.getElementById('totalMarks').textContent = totalMarks;
+        }
+
+        // Submit evaluation
+        function submitEvaluation() {
+            const total = document.getElementById('totalMarks').textContent;
+            alert(`Evaluation Submitted! Total Marks: ${total}/100`);
+        }
+    </script>
+</body>
+</html>
+

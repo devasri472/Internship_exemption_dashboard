@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard | Approve Internship</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ebacc1 0%, #9ff3f0 100%);
+            color: #333;
+            font-family: 'Nunito', sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            background-color: #3490dc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #1d72b8;
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 2000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        .status-eligible {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .status-not-eligible {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .view-button {
+            background: #3490dc;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .view-button:hover {
+            background: #1d72b8;
+        }
+
+        .approve-button,
+        .decline-button {
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+        }
+
+        .approve-button {
+            background-color: #38a169;
+        }
+
+        .approve-button:hover {
+            background-color: #2f855a;
+        }
+
+        .decline-button {
+            background-color: #e53e3e;
+        }
+
+        .decline-button:hover {
+            background-color: #c53030;
+        }
+
+        .not-eligible-description {
+            color: #e53e3e;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-button" id="back-dashboard">Back to Dashboard</button>
+
+    <div class="table-container">
+        <h2 class="text-2xl font-bold mb-4">Approve Internship Applications</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>NAME</th>
+                    <th>ROLL NUMBER</th>
+                    <th>COMPANY NAME</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>DEVASRI S</td>
+                    <td>7376221CS132</td>
+                    <td>GOOGLE</td>
+                    <td>
+                        <span class="status-eligible">ELIGIBLE</span>
+                    </td>
+                    <td>
+                        <button class="view-button" onclick="viewDetails('7376221CS132')">View Details</button>
+                        <button class="approve-button">Approve</button>
+                        <button class="decline-button">Decline</button>
+                    </td>
+                </tr>
+            
+            <tr>
+                <td>2</td>
+                <td>RUBASRI S</td>
+                <td>7376221CS133</td>
+                <td>AMAZON</td>
+                <td>
+                    <span class="status-eligible">ELIGIBLE</span>
+                    
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221CS133')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>GOMATHI P</td>
+                <td>7376221CS134</td>
+                <td>INFOSYS</td>
+                <td>
+                    <span class="status-eligible">ELIGIBLE</span>
+                    
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221CS134')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>JOHN C</td>
+                <td>7376221CS137</td>
+                <td>CAPEGEMINI</td>
+                <td>
+                    <span class="status-eligible">ELIGIBLE</span>
+                    
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221CS137')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>ERIC R</td>
+                <td>7376221AL135</td>
+                <td>AVASOFT</td>
+                <td>
+                    <span class="status-eligible">ELIGIBLE</span>
+                    
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221AL135')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>SOPHY R</td>
+                <td>7376221CS138</td>
+                <td>ACCENTURE</td>
+                <td>
+                    <span class="status-not-eligible">NOT ELIGIBLE</span>
+                    <div class="not-eligible-description">UPLOAD THE OFFER LETTER PROPERLY</div>
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221CS138')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>SURYA D</td>
+                <td>7376221EC145</td>
+                <td>WIPRO</td>
+                <td>
+                    <span class="status-eligible">ELIGIBLE</span>
+                    
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221EC145')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>KARTHIGA G</td>
+                <td>7376221EC135</td>
+                <td>ZOHO</td>
+                <td>
+                    <span class="status-eligible">ELIGIBLE</span>
+                    
+                </td>
+                <td>
+                    <button class="view-button" onclick="viewDetails('7376221EC135')">View Details</button>
+                    <button class="approve-button">Approve</button>
+                    <button class="decline-button">Decline</button>
+                </td>
+            </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Navigate back to the dashboard
+        document.getElementById('back-dashboard').addEventListener('click', function () {
+            window.location.href = 'faculty_dashboard.html';
+        });
+
+        function viewDetails(studentId) {
+            alert("Viewing details for student ID: " + studentId);
+        }
+    </script>
+</body>
+
+</html>
