@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Submission</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 200%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 30px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .button {
+            background-color: #7F9CF5;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: #577ff5;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        .back-button {
+            background-color: #7F9CF5;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #4871eb;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        label {
+            color: #4a5568;
+        }
+        .content input,
+        .content select {
+            background: white;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+        }
+
+        input,
+        textarea {
+            background-color: white;
+            color: black;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #6B7280;
+        }
+
+        /* Popup message styling */
+        #popup-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mb-4 {
+            margin-bottom: 20px; /* Increased bottom margin to add more space between elements */
+        }
+
+        /* Hidden Stipend Amount Input */
+        #stipend-amount {
+            display: none;
+        }
+        .note {
+        font-size: 14px; /* Reduce the font size */
+        color: #DC2626; /* Red color */
+        margin-top: 5px; /* Add some space above */
+    }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <a href="student-dashboard.html" class="back-button">← Back to Dashboard</a>
+        <h2 class="text-3xl font-bold mb-6">Report Submission</h2>
+        <form id="report-form">
+            <div class="mb-4">
+                <label for="student"><b>Student </b><span class="text-red-500">*</span></label>
+                <select id="student" class="w-full p-3 rounded">
+                    <option value="">Select Student</option>
+                    <option value="7376221CS132-DEVASRI S">7376221CS132-DEVASRI S-CSE</option>
+                    <option value="7376221CS133-RUBASRI S">7376221EC133-RUBASRI S-ECE</option>
+                    <option value="7376221CS134-GOMATHI P">7376221EE134-GOMATHI P-EEE</option>
+                    <option value="7376221CS135-ERIC C">7376221AL135-ERIC C-AIML</option>
+                    <option value="7376221CS136-ADEN D">7376221AD136-ADEN D-AIDS</option>
+                    <option value="7376221CS137-SOPHY K">7376221ME137-SOPHY K-MECH</option>
+                    <option value="7376221CS138-SOPHY K">7376221CE137-JOHN Z-CIVIL</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="year-of-study"><b>Year of Study</b> <span class="text-red-500">*</span></label>
+                <select id="year-of-study" class="w-full p-3 rounded">
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="academic-year"><b>Academic Year</b> <span class="text-red-500">*</span></label>
+                <select id="academic-year" class="w-full p-3 rounded">
+                    <option value="">--</option>
+                    <option value="2024">2024-2025</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="company-name"><b>Name of the Company</b> <span class="text-red-500">*</span></label>
+                <input id="company-name" class="w-full p-3 rounded" type="text">
+            </div>
+            <div class="mb-4">
+                <label for="company-website"><b>Company Website</b></label><span class="text-red-500">*</span></label>
+                <input id="company-website" class="w-full p-3 rounded" type="url" placeholder="https://">
+            </div>
+            <!-- New Industry Contact Details Section -->
+            <div class="mb-4">
+                <label for="industry-contact"><b>Industry Contact Details (Email or Phone)</b></label><span class="text-red-500">*</span></label>
+                <input id="industry-contact" class="w-full p-3 rounded" type="text" placeholder="Email or Phone">
+            </div>
+            <div class="mb-4">
+                <label for="duration"><b>Duration (in days)</b> <span class="text-red-500">*</span></label>
+                <input id="duration" class="w-full p-3 rounded" type="number">
+            </div>
+            <div class="mb-4">
+                <label for="skills-got"><b>Skills Acquired</b> <span class="text-red-500">*</span></label>
+                <input id="skills-got" class="w-full p-3 rounded" type="text">
+            </div>
+            <div class="mb-4">
+                <label for="submission-date"><b>Date of Completion </b><span class="text-red-500">*</span></label>
+                <input id="submission-date" class="w-full p-3 rounded" type="date">
+            </div>
+             <!-- New Stipend Section -->
+             <div class="mb-4">
+                <label for="stipend"><b>Stipend</b> <span class="text-red-500">*</span></label>
+                <select id="stipend" class="w-full p-3 rounded">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="mb-4" id="stipend-amount">
+                <label for="stipend-amount-input"><b>Stipend Amount</b></label><span class="text-red-500">*</span></label>
+                <input id="stipend-amount-input" class="w-full p-3 rounded" type="number" placeholder="Enter Amount">
+            </div>
+            <div class="mb-4">
+                <label for="docu-letter"><b>Full Document Proof</b><span class="text-red-500">*</span></label>
+                <input id="docu-letter" class="w-full p-3 rounded" type="file" accept=".pdf">
+                <p class="note">Format:<em>7376221CS132-IR-28.08.2024.pdf</em>.</p>
+            </div>
+            <div class="mb-4">
+                <label for="completion-letter"><b>Completion Certificate</b><span class="text-red-500">*</span></label>
+                <input id="completion-letter" class="w-full p-3 rounded" type="file" accept=".pdf">
+                <p class="note"> Format:<em>7376221CS132-IRO-28.08.2024.pdf</em>.</p>
+            </div>
+            <div class="mb-4">
+                <label for="attest-letter"><b>Attested Certificate</b><span class="text-red-500">*</span></label>
+                <input id="attest-letter" class="w-full p-3 rounded" type="file" accept=".pdf">
+                <p class="note">Format: <em>7376221CS132-IRX-28.08.2024.pdf</em>.</p>
+            </div>
+
+            <div class="mb-4">
+                <label for="status"><b>IQAC VERIFICATION</b></label><span class="text-red-500">*</span>
+                <select id="status" class="w-full p-3 rounded">
+                    <option value="Not yet Started">Not yet Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+           
+            <form>
+            <button class="button" type="submit">Submit Report</button>
+        </form>
+
+        <!-- Popup message -->
+        <div id="popup-message">Your report has been successfully submitted!</div>
+    </div>
+
+    <script>
+        document.getElementById('report-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            // Show the popup message
+            var popup = document.getElementById('popup-message');
+            popup.style.display = 'block';
+
+            // Hide the popup after 4 seconds and redirect to dashboard
+            setTimeout(function() {
+                popup.style.display = 'none';
+                window.location.href = 'student-dashboard.html';
+            }, 4000);
+        });
+
+        // JavaScript to handle the conditional stipend amount input
+        document.getElementById('stipend').addEventListener('change', function() {
+            var stipendAmountDiv = document.getElementById('stipend-amount');
+            if (this.value === 'Yes') {
+                stipendAmountDiv.style.display = 'block';
+            } else {
+                stipendAmountDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

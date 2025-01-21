@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Internship | Internship Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            color: #333;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #7fb8f4, #567ace);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #4871eb;
+        }
+
+        .form-container {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 10px;
+        }
+
+        .mb-4 {
+            margin-bottom: 20px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #DC2626 !important;
+            margin-top: 5px;
+        }
+
+        .form-container h2 {
+            font-size: 1.75rem;
+            color: #2d3748;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            color: #4a5568;
+        }
+
+        .form-container input,
+        .form-container select {
+            background: white;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+        }
+
+        .form-container input:focus,
+        .form-container select:focus {
+            border-color: #7fb8f4;
+            outline: none;
+        }
+
+        .form-container button {
+            background: linear-gradient(135deg, #7fb8f4, #567ace);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #577ff5;
+        }
+
+        .form-container .note {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .success-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #38a169;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <a href="student-dashboard.html" class="back-button">← Back to Dashboard</a>
+        <h2>Apply Internship</h2>
+        <form id="internship-form">
+            <div class="mb-4">
+                <label for="student"><b>Student</b> <span class="text-red-500">*</span></label>
+                <select id="student" class="w-full p-3 rounded">
+                    <option value="">Select Student</option>
+                    <option value="7376221CS132-DEVASRI S">7376221CS132-DEVASRI S-CSE</option>
+                    <option value="7376221CS133-RUBASRI S">7376221EC133-RUBASRI S-ECE</option>
+                    <option value="7376221CS134-GOMATHI P">7376221EE134-GOMATHI P-EEE</option>
+                    <option value="7376221CS135-ERIC C">7376221AL135-ERIC C-AIML</option>
+                    <option value="7376221CS136-ADEN D">7376221AD136-ADEN D-AIDS</option>
+                    <option value="7376221CS137-SOPHY K">7376221ME137-SOPHY K-MECH</option>
+                    <option value="7376221CS138-SOPHY K">7376221CE137-JOHN Z-CIVIL</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="year-of-study"><b>Year of Study</b> <span class="text-red-500">*</span></label>
+                <select id="year-of-study" class="w-full p-3 rounded">
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="academic-year"><b>Academic Year</b> <span class="text-red-500">*</span></label>
+                <select id="academic-year" class="w-full p-3 rounded">
+                    <option value="">--</option>
+                    <option value="2024">2024-2025</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="company-name"><b>Name of the Company</b> <span class="text-red-500">*</span></label>
+                <input id="company-name" class="w-full p-3 rounded" type="text">
+            </div>
+            <div class="mb-4">
+                <label for="company-website"><b>Company Website</b></label><span class="text-red-500">*</span></label>
+                <input id="company-website" class="w-full p-3 rounded" type="url" placeholder="https://">
+            </div>
+            <div class="mb-4">
+                <label for="referred-by"><b>Referred By</b></label>
+                <select id="referred-by" class="w-full p-3 rounded">
+                    <option value="">Select</option>
+                    <option value="College">College</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Friends">Friends</option>
+                    <option value="Internshala">Internshala</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="duration"><b>Duration (in days)</b> <span class="text-red-500">*</span></label>
+                <input id="duration" class="w-full p-3 rounded" type="number">
+            </div>
+            <div class="mb-4">
+                <label for="submission-date"><b>Date of Submission </b><span class="text-red-500">*</span></label>
+                <input id="submission-date" class="w-full p-3 rounded" type="date">
+            </div>
+            <div class="mb-4">
+                <label for="offer-letter"><b>Upload Offer Letter or Proof</b><span class="text-red-500">*</span></label>
+                <input id="offer-letter" class="w-full p-3 rounded" type="file" accept=".pdf">
+                <p class="note">Format:<em>7376221CS132-IN-28.08.2024.pdf</em></p>
+            </div>
+
+            <div class="mb-4">
+                <label for="status"><b>IQAC VERIFICATION</b></label><span class="text-red-500">*</span>
+                <select id="status" class="w-full p-3 rounded">
+                    <option value="Not yet Started">Not yet Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+            <button id="submit-button" type="submit" class="w-full p-3 mt-4" disabled>Submit Application</button>
+        </form>
+    </div>
+
+    <div id="success-popup" class="success-popup" style="display: none;">
+        Internship application submitted successfully!
+    </div>
+
+    <script>
+        const form = document.getElementById('internship-form');
+        const submitButton = document.getElementById('submit-button');
+        const offerLetterInput = document.getElementById('offer-letter');
+
+        offerLetterInput.addEventListener('change', function () {
+            submitButton.disabled = offerLetterInput.files.length === 0;
+        });
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Display success message
+            const successPopup = document.getElementById('success-popup');
+            successPopup.style.display = 'block';
+
+            // Hide the message after 3.5 seconds and navigate to dashboard
+            setTimeout(function () {
+                successPopup.style.display = 'none';
+                window.location.href = "student-dashboard.html"; // Navigate to the dashboard
+            }, 3500);
+
+            // Reset the form
+            form.reset();
+            submitButton.disabled = true; // Disable the submit button after resetting the form
+        });
+
+    </script>
+</body>
+
+</html>

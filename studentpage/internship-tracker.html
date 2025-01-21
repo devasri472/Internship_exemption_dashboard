@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker | Internship Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            font-family: 'Kalam', cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .tracker-box {
+            background: rgba(255, 251, 251, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 30px;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-name {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .task-status {
+            font-size: 1em;
+            font-weight: 600;
+            color: #4caf50;
+        }
+
+        .add-task-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.2em;
+            font-family: 'Kalam', cursive;
+            color: #fff;
+            background-color: #92a3fd;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-task-button:hover {
+            background-color: #7c8ed9;
+        }
+
+        .add-task-button:active {
+            background-color: #5e6ba7;
+        }
+
+        .daily-report-form {
+            margin-top: 20px;
+        }
+
+        .daily-report-list {
+            margin-top: 20px;
+        }
+
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-top-btn:hover {
+            background-color: #555;
+        }
+
+        /* Back button style */
+        .back-button {
+            background: linear-gradient(135deg, #7fb8f4, #567ace);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #4871eb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Internship Tracker</h1>
+        <div class="tracker-box">
+            <a href="student-dashboard.html" class="back-button">Back to Dashboard</a>
+            <h2 class="text-xl font-bold mb-4">Progress Bar</h2>
+            <div id="progress-bar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+        </div>
+        <div class="tracker-box">
+            <h2 class="text-xl font-bold mb-4">Daily Reports</h2>
+            <div id="daily-report-list" class="daily-report-list"></div>
+            <form id="daily-report-form" class="daily-report-form">
+                <input type="text" id="report-content" maxlength="300" placeholder="Enter report for the day (max 300 characters)" class="w-full px-4 py-2 rounded mb-4">
+                <button type="submit" class="add-task-button">Submit Daily Report</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="scroll-top-btn" class="scroll-top-btn">Scroll to Top</button>
+
+    <script>
+        const totalDays = 30; // Total number of days in the internship
+        let completedReports = 0;
+
+        document.getElementById('daily-report-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const reportContent = document.getElementById('report-content').value;
+            if (reportContent === '') return;
+
+            completedReports++;
+            updateProgressBar();
+
+            const reportList = document.getElementById('daily-report-list');
+            const reportItem = document.createElement('div');
+            reportItem.className = 'task-item';
+            reportItem.innerHTML = `<div class="task-name">Daily Report - ${completedReports}: ${reportContent}</div><div class="task-status status-completed">Completed</div>`;
+            reportList.appendChild(reportItem);
+
+            document.getElementById('report-content').value = '';
+
+            // Scroll down to the submit button after adding a report
+            document.querySelector('.add-task-button').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function updateProgressBar() {
+            const progressPercentage = (completedReports / totalDays) * 100;
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progressPercentage + '%';
+
+            
+            if (completedReports > 10) {
+                progressBar.style.backgroundColor = '#4caf50'; 
+            } else {
+                progressBar.style.backgroundColor = 'red';
+            }
+        }
+
+        // Show/Hide Scroll to Top button
+        window.addEventListener('scroll', function () {
+            const scrollTopBtn = document.getElementById('scroll-top-btn');
+            if (window.scrollY > 200) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        });
+
+        // Scroll to top when the button is clicked
+        document.getElementById('scroll-top-btn').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

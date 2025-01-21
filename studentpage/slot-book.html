@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Interview</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 900px; /* Increased size */
+        }
+
+        
+        label {
+            color: #4a5568;/* Darker text color for better contrast */
+        }
+        .content input,
+        .content select {
+            background: white;
+            color: #2d3748;
+            border: 1px solid #cbd5e0;
+        }
+
+        .button {
+            background-color: #7F9CF5;
+            color: white;
+            padding: 12px 12px;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: #577ff5;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        .back-button {
+            background-color: #7F9CF5;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #4871eb;
+        }
+
+        input,
+        textarea {
+            background-color: white;
+            color: #2D3748; /* Darker text color inside input fields for better contrast */
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #4A5568; /* Darker placeholder text for better readability */
+        }
+        #popup-message {
+            display: none;
+            position: fixed;
+            top: 40px;
+            right: 50px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .mb-4 .note {
+        font-size: 12px;
+        color: #DC2626 !important; /* Red color with !important */
+        margin-top: 5px;
+    }
+        .note {
+        font-size: 12px; /* Reduce the font size */
+        color: #DC2626; /* Red color */
+        margin-top: 5px; /* Add some space above */
+    }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <a href="student-dashboard.html" class="back-button">← Back to Dashboard</a>
+        <h1 class="text-2xl font-bold mb-4">Final Interview</h1>
+        <form id="interview-form">
+            <div class="mb-4">
+                <label for="student"><b>Student</b> <span class="text-red-500">*</span></label>
+                <select id="student" class="w-full p-3 rounded">
+                    <option value="">Select Student</option>
+                    <option value="7376221CS132-DEVASRI S">7376221CS132-DEVASRI S-CSE</option>
+                    <option value="7376221CS133-RUBASRI S">7376221EC133-RUBASRI S-ECE</option>
+                    <option value="7376221CS134-GOMATHI P">7376221EE134-GOMATHI P-EEE</option>
+                    <option value="7376221CS135-ERIC C">7376221AL135-ERIC C-AIML</option>
+                    <option value="7376221CS136-ADEN D">7376221AD136-ADEN D-AIDS</option>
+                    <option value="7376221CS137-SOPHY K">7376221ME137-SOPHY K-MECH</option>
+                    <option value="7376221CS138-SOPHY K">7376221CE137-JOHN Z-CIVIL</option>
+                    
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="year-of-study"><b>Year of Study</b> <span class="text-red-500">*</span></label>
+                <select id="year-of-study" class="w-full p-3 rounded">
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="date"><b>Available Slot Date</b><span class="text-red-500">*</span></label>
+                <select id="slot-date" class="w-full p-3 rounded">
+                    <option value="">Select Date</option>
+                    <option value="1st date">01.09.2024</option>
+                    <option value="2nd date">02.09.2024</option>
+                    <option value="3rd date">03.09.2024</option>
+                    <option value="4th date">04.09.2024</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="time"><b>Preferred Time</b><span class="text-red-500">*</span></label>
+                <select id="slot-time" class="w-full p-3 rounded">
+                    <option value="">Select Time</option>
+                    <option value="1st slot">09:00 - 10:00 a.m.</option>
+                    <option value="2nd slot">11:00 - 12:00 a.m.</option>
+                    <option value="3rd slot">02:00 - 03:00 p.m.</option>
+                    <option value="4th slot">03:00 - 04:00 p.m.</option>
+                   
+                </select>
+                <p class="note">Venue alloted : <em>MECH-212</em></p>
+            </div>
+           
+            
+                <button class="button" type="submit">BOOK SLOT</button>
+           
+        </form>
+        <div id="popup-message">Slot Booked Successfully!</div>
+    </div>
+
+    <script>
+        document.getElementById('interview-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            
+             // Show the popup message
+             var popup = document.getElementById('popup-message');
+            popup.style.display = 'block';
+
+            // Hide the popup after 4 seconds and redirect to dashboard
+            setTimeout(function() {
+                popup.style.display = 'none';
+                window.location.href = 'student-dashboard.html';
+            }, 4000);
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Results</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .results-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 100vh; /* Set a max-height */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the max-height */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            flex: 0 0 250px;
+            margin-left: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .eligible {
+            background-color: #c6f6d5;
+            color: #2f855a;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .not-eligible {
+            background-color: #fed7d7;
+            color: #c53030;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <div class="header-container">
+            <h2 class="text-center text-2xl font-semibold">Interview Results</h2>
+            <input type="text" id="searchInput" class="search-bar p-2 border border-gray-300 rounded" placeholder="🔍 Search by student Name/Rollnum">
+        </div>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>NAME</th>
+                    <th>ROLL NUMBER</th>
+                    <th>REVIEW DATE</th>
+                    <th>COMPANY NAME</th>
+                    <th>MARKS SECURED</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>DEVASRI S</td>
+                    <td>7376221CS132</td>
+                    <td>22-06-2024</td>
+                    <td>GOOGLE</td>
+                    <td>95/100</td>
+                    <td class="eligible">ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>RUBASRI S</td>
+                    <td>7376221CS133</td>
+                    <td>25-06-2024</td>
+                    <td>AMAZON</td>
+                    <td>78/100</td>
+                    <td class="eligible">ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>GOMATHI P</td>
+                    <td>7376221CS134</td>
+                    <td>14-07-2024</td>
+                    <td>INFOSYS</td>
+                    <td>95/100</td>
+                    <td class="eligible">ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>JOHN C</td>
+                    <td>7376221CS137</td>
+                    <td>16-07-2024</td>
+                    <td>CAPEGEMINI</td>
+                    <td>45/100</td>
+                    <td class="not-eligible">NOT ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>ERIC R</td>
+                    <td>7376221AL135</td>
+                    <td>19-07-2024</td>
+                    <td>AVASOFT</td>
+                    <td>35/100</td>
+                    <td class="not-eligible">NOT ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>SOPHY R</td>
+                    <td>7376221CS138</td>
+                    <td>29-07-2024</td>
+                    <td>ACCENTURE</td>
+                    <td>45/100</td>
+                    <td class="not-eligible">NOT ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>SURYA D</td>
+                    <td>7376221EC145</td>
+                    <td>01-08-2024</td>
+                    <td>WIPRO</td>
+                    <td>55/100</td>
+                    <td class="eligible">ELIGIBLE</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>KARTHIKA G</td>
+                    <td>7376221EC135</td>
+                    <td>03-08-2024</td>
+                    <td>ZOHO</td>
+                    <td>35/100</td>
+                    <td class="not-eligible">NOT ELIGIBLE</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#resultsTable tbody tr');
+
+            rows.forEach(row => {
+                const nameCell = row.querySelector('td:nth-child(2)');
+                const name = nameCell.textContent.toLowerCase();
+
+                if (name.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

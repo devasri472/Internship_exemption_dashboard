@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            color: #333;
+            font-family: 'Nunito', sans-serif; /* Modern font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .nav-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #4a5568;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item:hover {
+            background-color:#7fb8f4;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        #logout-link.nav-item:hover {
+        background-color: #ee5d5d; /* Red color */
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #7fb8f4, #567ace);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: glow 2s infinite;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.05);
+            background-color: #567ace;
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        .header {
+            font-size: 3rem;
+            color: #1a202c;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            animation: shake 1s infinite;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background: url('../image/logo.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0.85;
+            margin-bottom: 16px;
+        }
+
+        .sidebar {
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #popup-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color:red;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes shake {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(5px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3); }
+            50% { box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6); }
+            100% { box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glass">
+        <!-- Sidebar -->
+        <div class="sidebar flex flex-col items-center">
+            <div class="logo"></div>
+            <ul class="w-full">
+                <li id="internship-tracker-link" class="nav-item"><a href="#">Internship Tracker</a></li>
+                <li id="report-submission-link" class="nav-item"><a href="#">Report Submission</a></li>
+                <li id="final-interview-link" class="nav-item"><a href="#">Final Interview / Results</a></li>
+                <li id="logout-link" class="nav-item"><a href="#">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            
+            <h1 class="header"> Welcome to the Internship Dashboard</h1>
+            <button id="apply-btn" class="primary-btn">APPLY FOR INTERNSHIP</button>
+        </div>
+        <div id="popup-message">Logged out Successfully!</div>
+    </div>
+
+    <!-- JavaScript to handle navigation -->
+    <script>
+        document.getElementById('internship-tracker-link').addEventListener('click', function (event) {
+            event.preventDefault();
+            window.location.href = 'internship-tracker.html';
+        });
+
+        document.getElementById('report-submission-link').addEventListener('click', function (event) {
+            event.preventDefault();
+            window.location.href = 'report-submission.html';
+        });
+
+        document.getElementById('final-interview-link').addEventListener('click', function (event) {
+            event.preventDefault();
+            window.location.href = 'final-interview.html';
+        });
+
+        document.getElementById('logout-link').addEventListener('click', function (event) {
+            event.preventDefault();
+            
+
+            var popup = document.getElementById('popup-message');
+            popup.style.display = 'block';
+            window.location.href='../Loginpage/main.html';
+           
+        });
+
+        // Handle apply for internship button click
+        document.getElementById('apply-btn').addEventListener('click', function (event) {
+            event.preventDefault();
+            window.location.href = 'apply-internship.html';
+        });
+    </script>
+</body>
+
+</html>

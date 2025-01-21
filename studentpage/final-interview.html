@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIT Portal</title>
+    <style>
+        /* Apply a gradient background and center the content using Flexbox */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Container styling */
+        .container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            width: 350px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Title styling */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: #89CFF0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            border-radius: 10px;
+        }
+
+        /* Button styles */
+        .btn {
+            background: linear-gradient(135deg, #92a3fd 0%, #a4c2fb 100%);
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            color: #fff;
+            background: #89CFF0;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #92a3fd 0%, #a4c2fb 100%);
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: width 0.4s ease, height 0.4s ease;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .btn:hover::before {
+            width: 0;
+            height: 0;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Go Back button styling */
+        .go-back-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.7em;
+            color: #333;
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            outline: none;
+            text-decoration: underline;
+        }
+
+        .go-back-btn:hover {
+            
+            transform: scale(1.05);
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .go-back-btn {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BIT Portal</h1>
+        <button class="btn" onclick="location.href='slot-book.html'"><span>Book Slot 🗓️</span></button>
+        <button class="btn" onclick="location.href='result.html'"><span>View Results ✅</span></button>
+        <button class="go-back-btn" onclick="location.href='student-dashboard.html'">Go Back</button>
+    </div>
+</body>
+</html>
